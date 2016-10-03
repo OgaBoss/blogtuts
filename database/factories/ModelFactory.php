@@ -13,11 +13,20 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
-
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => 1,
+        'body' => implode(',',$faker->paragraphs($nb = 5, $asText = false)),
+        'title' => $faker->sentence($nbWords = 6, $variableNbWords = true),
+        'subject' => $faker->sentence($nbWords = 4, $variableNbWords = true),
+        'tags' => $faker->unique()->word . "," . $faker->unique()->word .",". $faker->unique()->word,
     ];
 });

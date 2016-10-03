@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->string('title')->default('');
             $table->string('subject')->default('');
+            $table->string('tags')->default('');
             $table->timestamps();
 
             $table->foreign('user_id')
